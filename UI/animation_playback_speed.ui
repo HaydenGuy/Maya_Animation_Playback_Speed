@@ -18,14 +18,14 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QRadioButton" name="button_05x">
+       <widget class="QRadioButton" name="button_1x">
         <property name="text">
          <string>1x</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="button_1x">
+       <widget class="QRadioButton" name="button_05x">
         <property name="text">
          <string>0.5x</string>
         </property>
@@ -39,7 +39,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QRadioButton" name="button2x">
+       <widget class="QRadioButton" name="button_2x">
         <property name="text">
          <string>2x</string>
         </property>
