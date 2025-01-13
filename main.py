@@ -46,8 +46,8 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.slider.setFloatStep(0.1)
         self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
 
-        slider_label = QLabel("1.0x")
-        self.v_slider_layout.addWidget(slider_label, alignment=Qt.AlignHCenter)
+        self.slider_label = QLabel("1.0x")
+        self.v_slider_layout.addWidget(self.slider_label, alignment=Qt.AlignHCenter)
 
         # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
@@ -73,9 +73,10 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
             cmds.playbackOptions(playbackSpeed=2)
 
     # Updates the playback speed and label when the slider value changes
-    def slider_changed(self, value):
+    def slider_changed(self):
+        value = self.slider.floatValue()
         self.slider_label.setText(f"{value}x")
-        cmds.playbackOptions(playbackSpeed=float(value))
+        cmds.playbackOptions(playbackSpeed=value)
         
 if __name__ == '__main__':
     # Create a Qt application instance or use the existing one
