@@ -15,9 +15,9 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QHBoxLayout, QLabel, QMainWindow,
-    QMenuBar, QRadioButton, QSizePolicy, QSlider,
-    QStatusBar, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QMenuBar,
+    QRadioButton, QSizePolicy, QStatusBar, QVBoxLayout,
+    QWidget)
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -58,21 +58,6 @@ class Ui_main_window(object):
 
         self.v_slider_layout = QVBoxLayout()
         self.v_slider_layout.setObjectName(u"v_slider_layout")
-        self.slider = QSlider(self.centralwidget)
-        self.slider.setObjectName(u"slider")
-        self.slider.setMaximum(10)
-        self.slider.setSingleStep(1)
-        self.slider.setOrientation(Qt.Orientation.Vertical)
-        self.slider.setTickPosition(QSlider.TickPosition.NoTicks)
-        self.slider.setTickInterval(1)
-
-        self.v_slider_layout.addWidget(self.slider, 0, Qt.AlignmentFlag.AlignHCenter)
-
-        self.slider_label = QLabel(self.centralwidget)
-        self.slider_label.setObjectName(u"slider_label")
-
-        self.v_slider_layout.addWidget(self.slider_label, 0, Qt.AlignmentFlag.AlignHCenter)
-
 
         self.v_layout.addLayout(self.v_slider_layout)
 
@@ -99,6 +84,5 @@ class Ui_main_window(object):
         self.button_05x.setText(QCoreApplication.translate("main_window", u"0.5x", None))
         self.button_025x.setText(QCoreApplication.translate("main_window", u"0.25x", None))
         self.button_2x.setText(QCoreApplication.translate("main_window", u"2x", None))
-        self.slider_label.setText(QCoreApplication.translate("main_window", u"0x", None))
     # retranslateUi
 
