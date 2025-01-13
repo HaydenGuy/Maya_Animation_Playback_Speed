@@ -16,19 +16,19 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.button_025x.clicked.connect(self.button_changed)
         self.button_2x.clicked.connect(self.button_changed)
 
-
+    # Updates the playback speed when a radio button is checked
     def button_changed(self):
         if self.button_1x.isChecked():
-            cmds.polySphere()
+            cmds.playbackOptions(playbackSpeed=1) # Sets playback speed to specific float value
 
         elif self.button_05x.isChecked():
-            cmds.polyCube()
-        
+            cmds.playbackOptions(playbackSpeed=0.5)
+
         elif self.button_025x.isChecked():
-            cmds.polyCylinder()
-        
+            cmds.playbackOptions(playbackSpeed=0.25)
+
         elif self.button_2x.isChecked():
-            cmds.polyCone()
+            cmds.playbackOptions(playbackSpeed=2)
 
 if __name__ == '__main__':
     # Create a Qt application instance or use the existing one
