@@ -44,7 +44,7 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.slider.setFloatRange(0.1, 10.0)
         self.slider.setFloatValue(1.0)
         self.slider.setFloatStep(0.1)
-        self.v_slider_layout.addWidget(self.slider)
+        self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
 
         # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
