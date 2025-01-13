@@ -3,7 +3,7 @@ from maya import cmds
 
 sys.path.append("/home/hayden/Documents/Maya/Animation_Playback_Speed")
 
-from PySide6.QtWidgets import QMainWindow, QApplication, QSlider
+from PySide6.QtWidgets import QMainWindow, QApplication, QSlider, QLabel
 from PySide6.QtCore import Qt
 
 import UI.animation_playback_speed as aps
@@ -45,6 +45,9 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.slider.setFloatValue(1.0)
         self.slider.setFloatStep(0.1)
         self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
+
+        slider_label = QLabel("1.0x")
+        self.v_slider_layout.addWidget(slider_label, alignment=Qt.AlignHCenter)
 
         # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
