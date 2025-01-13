@@ -23,9 +23,8 @@ class Ui_main_window(object):
     def setupUi(self, main_window):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
-        main_window.resize(94, 318)
-        icon = QIcon(QIcon.fromTheme(QIcon.ThemeIcon.MediaPlaybackStart))
-        main_window.setWindowIcon(icon)
+        main_window.resize(94, 321)
+        main_window.setMinimumSize(QSize(94, 321))
         self.centralwidget = QWidget(main_window)
         self.centralwidget.setObjectName(u"centralwidget")
         self.horizontalLayout = QHBoxLayout(self.centralwidget)
@@ -62,16 +61,17 @@ class Ui_main_window(object):
         self.slider = QSlider(self.centralwidget)
         self.slider.setObjectName(u"slider")
         self.slider.setMaximum(10)
+        self.slider.setSingleStep(1)
         self.slider.setOrientation(Qt.Orientation.Vertical)
         self.slider.setTickPosition(QSlider.TickPosition.NoTicks)
         self.slider.setTickInterval(1)
 
         self.v_slider_layout.addWidget(self.slider, 0, Qt.AlignmentFlag.AlignHCenter)
 
-        self.label = QLabel(self.centralwidget)
-        self.label.setObjectName(u"label")
+        self.slider_label = QLabel(self.centralwidget)
+        self.slider_label.setObjectName(u"slider_label")
 
-        self.v_slider_layout.addWidget(self.label, 0, Qt.AlignmentFlag.AlignHCenter)
+        self.v_slider_layout.addWidget(self.slider_label, 0, Qt.AlignmentFlag.AlignHCenter)
 
 
         self.v_layout.addLayout(self.v_slider_layout)
@@ -99,6 +99,6 @@ class Ui_main_window(object):
         self.button_05x.setText(QCoreApplication.translate("main_window", u"0.5x", None))
         self.button_025x.setText(QCoreApplication.translate("main_window", u"0.25x", None))
         self.button_2x.setText(QCoreApplication.translate("main_window", u"2x", None))
-        self.label.setText(QCoreApplication.translate("main_window", u"0x", None))
+        self.slider_label.setText(QCoreApplication.translate("main_window", u"0x", None))
     # retranslateUi
 
