@@ -3,8 +3,33 @@ from maya import cmds
 
 sys.path.append("/home/hayden/Documents/Maya/Animation_Playback_Speed")
 
-from PySide6.QtWidgets import QMainWindow, QApplication
+from PySide6.QtWidgets import QMainWindow, QApplication, QSlider
+from PySide6.QtCore import Qt
+
 import UI.animation_playback_speed as aps
+
+# Slider that uses float values rather than int
+class FloatSlider(QSlider):
+    def __init__(self, orientation=Qt.Vertical, parent=None):
+        super().__init__(orientation, parent)
+        self._scale = 100  # Default scaling factor for floats
+
+    # Set the range using float
+    def setFloatRange(self, min_value, max_value):
+        self.setMinimum(int(min_value * self._scale))
+        self.setMaximum(int(max_value * self._scale))
+
+    # Set value using float
+    def setFloatValue(self, value):
+        self.setValue(int(value * self._scale))
+
+    # Get current value as float
+    def floatValue(self):
+        return self.value() / self._scale
+
+    # Set the step size for the slider
+    def setFloatStep(self, step):
+        self.setSingleStep(int(step * self._scale))
 
 class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
     def __init__(self):
@@ -13,6 +38,13 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
 
         # Hide name from the title bar
         self.setWindowTitle("")
+
+        # Initialize and add FloatSlider with values and steps
+        self.slider = FloatSlider(Qt.Vertical)
+        self.slider.setFloatRange(0.1, 10.0)
+        self.slider.setFloatValue(1.0)
+        self.slider.setFloatStep(0.1)
+        self.v_slider_layout.addWidget(self.slider)
 
         # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
