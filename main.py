@@ -27,9 +27,10 @@ class FloatSlider(QSlider):
     def floatValue(self):
         return self.value() / self._scale
 
-    # Set the step size for the slider
+    # Set the step and tick size for the slider
     def setFloatStep(self, step):
         self.setSingleStep(int(step * self._scale))
+        self.setTickInterval(int(step * self._scale))
 
 class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
     def __init__(self):
@@ -39,15 +40,7 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         # Hide name from the title bar
         self.setWindowTitle("")
 
-        # Initialize and add FloatSlider with values and steps
-        self.slider = FloatSlider(Qt.Vertical)
-        self.slider.setFloatRange(0.1, 10.0)
-        self.slider.setFloatValue(1.0)
-        self.slider.setFloatStep(0.1)
-        self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
-
-        self.slider_label = QLabel("1.0x")
-        self.v_slider_layout.addWidget(self.slider_label, alignment=Qt.AlignHCenter)
+        self.add_slider()
 
         # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
@@ -57,6 +50,19 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
 
         # When slider value changes call slider_changed method
         self.slider.valueChanged.connect(self.slider_changed)
+
+    # Add the slider and its label to v_slider_layout
+    def add_slider(self):
+        # Initialize and add FloatSlider with values and steps
+        self.slider = FloatSlider(Qt.Vertical)
+        self.slider.setFloatRange(0.1, 5.0)
+        self.slider.setFloatValue(1.0)
+        self.slider.setFloatStep(0.1)
+        self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
+
+        # Initalize and add slider label 
+        self.slider_label = QLabel("1.0x")
+        self.v_slider_layout.addWidget(self.slider_label, alignment=Qt.AlignHCenter)
 
     # Updates the playback speed when a radio button is checked
     def button_changed(self):
@@ -75,7 +81,7 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
     # Updates the playback speed and label when the slider value changes
     def slider_changed(self):
         value = self.slider.floatValue()
-        self.slider_label.setText(f"{value}x")
+        self.slider_label.setText(f"{value:.1f}x") # :.1f = 1 decimal place (0.1)
         cmds.playbackOptions(playbackSpeed=value)
         
 if __name__ == '__main__':
