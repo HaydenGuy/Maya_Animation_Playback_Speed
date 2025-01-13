@@ -19,6 +19,8 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.button_025x.clicked.connect(self.button_changed)
         self.button_2x.clicked.connect(self.button_changed)
 
+        self.slider.valueChanged.connect(self.slider_changed)
+
     # Updates the playback speed when a radio button is checked
     def button_changed(self):
         if self.button_1x.isChecked():
@@ -33,6 +35,11 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         elif self.button_2x.isChecked():
             cmds.playbackOptions(playbackSpeed=2)
 
+    # Updates the playback speed and label when the slider value changes
+    def slider_changed(self, value):
+        self.slider_label.setText(f"{value}x")
+        cmds.playbackOptions(playbackSpeed=float(value))
+        
 if __name__ == '__main__':
     # Create a Qt application instance or use the existing one
     app = QApplication.instance()
