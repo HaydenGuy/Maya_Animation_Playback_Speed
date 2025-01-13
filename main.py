@@ -11,6 +11,9 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         super().__init__()
         self.setupUi(self)
 
+        # Hide name from the title bar
+        self.setWindowTitle("")
+
         self.button_1x.clicked.connect(self.button_changed)
         self.button_05x.clicked.connect(self.button_changed)
         self.button_025x.clicked.connect(self.button_changed)
@@ -35,6 +38,9 @@ if __name__ == '__main__':
     app = QApplication.instance()
     if not app:
         app = QApplication(sys.argv)
+
+    # Hides the application name from the title bar
+    app.setApplicationDisplayName("")
     
     # Create and show the UI window
     window = Animation_Playback_Speed()    
