@@ -14,11 +14,13 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         # Hide name from the title bar
         self.setWindowTitle("")
 
+        # When radio button clicked call button_changed method
         self.button_1x.clicked.connect(self.button_changed)
         self.button_05x.clicked.connect(self.button_changed)
         self.button_025x.clicked.connect(self.button_changed)
         self.button_2x.clicked.connect(self.button_changed)
 
+        # When slider value changes call slider_changed method
         self.slider.valueChanged.connect(self.slider_changed)
 
     # Updates the playback speed when a radio button is checked
