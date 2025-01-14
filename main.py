@@ -83,6 +83,11 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         value = self.slider.floatValue()
         self.slider_label.setText(f"{value:.1f}x") # :.1f = 1 decimal place (0.1)
         cmds.playbackOptions(playbackSpeed=value)
+
+    # When QMainWindow closes set playback speed to 1
+    def closeEvent(self, event):
+        cmds.playbackOptions(playbackSpeed=1)
+        event.accept()
         
 if __name__ == '__main__':
     # Create a Qt application instance or use the existing one
