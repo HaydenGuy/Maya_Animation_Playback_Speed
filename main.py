@@ -1,12 +1,10 @@
 import sys
 from maya import cmds
 
-sys.path.append("/home/hayden/Documents/Maya/Animation_Playback_Speed")
-
 from PySide6.QtWidgets import QMainWindow, QApplication, QSlider, QLabel
 from PySide6.QtCore import Qt
 
-import UI.animation_playback_speed as aps
+import Animation_Playback_Speed.UI.ui as ui
 
 # Slider that uses float values rather than int
 class FloatSlider(QSlider):
@@ -32,10 +30,12 @@ class FloatSlider(QSlider):
         self.setSingleStep(int(step * self._scale))
         self.setTickInterval(int(step * self._scale))
 
-class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
+class Animation_Playback_Speed(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setupUi(self)
+
+        self.ui = ui.Ui_main_window()
+        self.ui.setupUi(self)
 
         # Hide name from the title bar
         self.setWindowTitle("")
@@ -43,10 +43,10 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.add_slider()
 
         # When radio button clicked call button_changed method
-        self.button_1x.clicked.connect(self.button_changed)
-        self.button_05x.clicked.connect(self.button_changed)
-        self.button_025x.clicked.connect(self.button_changed)
-        self.button_2x.clicked.connect(self.button_changed)
+        self.ui.button_1x.clicked.connect(self.button_changed)
+        self.ui.button_05x.clicked.connect(self.button_changed)
+        self.ui.button_025x.clicked.connect(self.button_changed)
+        self.ui.button_2x.clicked.connect(self.button_changed)
 
         # When slider value changes call slider_changed method
         self.slider.valueChanged.connect(self.slider_changed)
@@ -58,24 +58,24 @@ class Animation_Playback_Speed(QMainWindow, aps.Ui_main_window):
         self.slider.setFloatRange(0.1, 5.0)
         self.slider.setFloatValue(1.0)
         self.slider.setFloatStep(0.1)
-        self.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
+        self.ui.v_slider_layout.addWidget(self.slider, alignment=Qt.AlignHCenter)
 
         # Initalize and add slider label 
         self.slider_label = QLabel("1.0x")
-        self.v_slider_layout.addWidget(self.slider_label, alignment=Qt.AlignHCenter)
+        self.ui.v_slider_layout.addWidget(self.slider_label, alignment=Qt.AlignHCenter)
 
     # Updates the playback speed when a radio button is checked
     def button_changed(self):
-        if self.button_1x.isChecked():
+        if self.ui.button_1x.isChecked():
             cmds.playbackOptions(playbackSpeed=1) # Sets playback speed to specific float value
 
-        elif self.button_05x.isChecked():
+        elif self.ui.button_05x.isChecked():
             cmds.playbackOptions(playbackSpeed=0.5)
 
-        elif self.button_025x.isChecked():
+        elif self.ui.button_025x.isChecked():
             cmds.playbackOptions(playbackSpeed=0.25)
 
-        elif self.button_2x.isChecked():
+        elif self.ui.button_2x.isChecked():
             cmds.playbackOptions(playbackSpeed=2)
 
     # Updates the playback speed and label when the slider value changes
